@@ -14,17 +14,23 @@
 typedef struct s_philo
 {
 	int			id;
-	int			left;
-	int			right;
-	long		last_mean_ms;
-	int			meanls;
+	pthread_mutex_t	left;
+	pthread_mutex_t	right;
+	long		last_meal_ms;
+	int			meals;
 	pthread_t	thread;
-	t_sim		*sim;
 }	t_philo;
 
 typedef struct s_sim
 {
+	int	number_of_philosophers;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	max_eat_count;
 }	t_sim;
 
+/* utils */
+int	ft_atoi(const char *str);
 
 #endif
