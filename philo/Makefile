@@ -17,10 +17,8 @@ OBJDIR  = obj
 # === Sources ===
 SRC_APP  = \
 	main/app.c \
-	main/utils.c
-
-SRC_ARGS = \
-	main/args/args.c
+	main/utils.c \
+	main/parse.c
 
 SRC_CORE = \
 	main/core/core.c

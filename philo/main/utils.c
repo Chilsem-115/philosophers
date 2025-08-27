@@ -20,9 +20,11 @@ int	ft_atoi(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		num = num * 10 + (*str - '0');
-		if (num * sign > INT_MAX || num * sign <= 0)
+		if (num * sign > INT_MAX || num * sign <= INT_MIN)
 			return (-1);
 		str++;
 	}
+	if (num * sign <= 0)
+		return (-1);
 	return (num * sign);
 }
