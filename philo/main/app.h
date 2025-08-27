@@ -6,7 +6,7 @@
 /*   By: itamsama <itamsama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 06:37:11 by itamsama          #+#    #+#             */
-/*   Updated: 2025/08/27 07:43:13 by itamsama         ###   ########.fr       */
+/*   Updated: 2025/08/27 08:16:16 by itamsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ typedef struct s_philo
 	long			last_meal_ms;
 	int				meals;
 	int				is_dead;
+	t_sim			sim;
 }	t_philo;
 
 typedef struct s_sim
 {
-	int		number_of_philosophers;
+	int		philo_count;
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;

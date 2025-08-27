@@ -6,7 +6,7 @@
 /*   By: itamsama <itamsama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 06:35:18 by itamsama          #+#    #+#             */
-/*   Updated: 2025/08/27 06:56:02 by itamsama         ###   ########.fr       */
+/*   Updated: 2025/08/27 08:03:49 by itamsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int validate(t_sim *sim)
 {
-	if (sim->number_of_philosophers == -1)
+	if (sim->philo_count == -1)
 		return (1);
 	if (sim->time_to_die == -1)
 		return (1);
@@ -29,7 +29,7 @@ static int validate(t_sim *sim)
 
 static void	init_program(t_sim *sim, char **argv, int argc)
 {
-	sim->number_of_philosophers = ft_atoi(argv[1]);
+	sim->philo_count = ft_atoi(argv[1]);
 	sim->time_to_die = ft_atoi(argv[2]);
 	sim->time_to_eat= ft_atoi(argv[3]);
 	sim->time_to_sleep = ft_atoi(argv[4]);
