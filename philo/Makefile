@@ -25,10 +25,11 @@ SRC_INIT = \
 
 SRC_CORE = \
 	main/core/core.c \
+	main/core/cleanup.c
 
 SRC_SIM  = \
 	main/core/sim/sim_join.c \
-	main/core/sim/sim_spawm.c \
+	main/core/sim/sim_spawn.c \
 	main/core/sim/sim_state.c
 
 SRC_SYNC = \

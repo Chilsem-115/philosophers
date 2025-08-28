@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_default.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itamsama <itamsama@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/28 22:29:39 by itamsama          #+#    #+#             */
+/*   Updated: 2025/08/28 22:29:53 by itamsama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "app.h"
 
@@ -22,7 +33,7 @@ static void	set_default_vars(t_sim *sim)
 
 static int	init_forks(pthread_mutex_t *forks, int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < n)
@@ -34,9 +45,23 @@ static int	init_forks(pthread_mutex_t *forks, int n)
 	return (0);
 }
 
+static int	set_meal_mtx(t_sim *sim)
+{
+	int	i;
+
+	i = 0;
+	while (i < sim->cfg.philo_count)
+	{
+		if (pthread_mutex_init(&sim->philo[i].meal_mtx, NULL) != 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 static int	set_philo(t_sim *sim)
 {
-	int n;
+	int	n;
 
 	n = sim->cfg.philo_count;
 	sim->philo = (t_philo *)malloc(sizeof(t_philo) * n);
@@ -46,6 +71,8 @@ static int	set_philo(t_sim *sim)
 	if (pthread_mutex_init(&sim->print_mtx, NULL) != 0)
 		return (1);
 	if (pthread_mutex_init(&sim->state_mtx, NULL) != 0)
+		return (1);
+	if (set_meal_mtx(sim))
 		return (1);
 	if (init_forks(sim->forks, n))
 		return (1);

@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitor.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itamsama <itamsama@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/28 22:27:15 by itamsama          #+#    #+#             */
+/*   Updated: 2025/08/28 22:28:22 by itamsama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "core.h"
 
-static int philo_get_meals(t_philo *p)
+static int	philo_get_meals(t_philo *p)
 {
-    int v;
-    pthread_mutex_lock(&p->meal_mtx);
-    v = p->meals;
-    pthread_mutex_unlock(&p->meal_mtx);
-    return v;
+	int	v;
+
+	pthread_mutex_lock(&p->meal_mtx);
+	v = p->meals;
+	pthread_mutex_unlock(&p->meal_mtx);
+	return (v);
 }
 
 static int	find_starved(t_sim *sim, long now)

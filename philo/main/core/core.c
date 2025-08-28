@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   core.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itamsama <itamsama@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/28 22:23:17 by itamsama          #+#    #+#             */
+/*   Updated: 2025/08/28 22:23:33 by itamsama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "core.h"
 
@@ -29,12 +40,13 @@ int	simulate(t_sim *sim)
 
 	created = 0;
 	seed_start_state(sim);
-	if(spawn_philos(sim, &created))
+	if (spawn_philos(sim, &created))
 		return (stop_and_join(sim, created), 1);
 	if (spawn_monitor(sim))
 		return (stop_and_join(sim, created), 1);
 	if (join_monitor(sim))
 		return (stop_and_join(sim, sim->cfg.philo_count), 1);
 	join_philos(sim, sim->cfg.philo_count);
+	cleanup(sim);
 	return (0);
 }

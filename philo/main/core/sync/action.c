@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   action.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itamsama <itamsama@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/28 22:25:49 by itamsama          #+#    #+#             */
+/*   Updated: 2025/08/28 22:26:41 by itamsama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "core.h"
 
@@ -5,8 +16,10 @@ int	log_status(t_sim *sim, int id, const char *msg, int is_death)
 {
 	int	should_print;
 
+	pthread_mutex_lock(&sim->state_mtx);
+	should_print = ((!sim->finished) || is_death);
+	pthread_mutex_unlock(&sim->state_mtx);
 	pthread_mutex_lock(&sim->print_mtx);
-	should_print = (!sim->finished) || is_death;
 	if (should_print)
 		printf("%ld %d %s\n", new_ms() - sim->start_ms, id, msg);
 	pthread_mutex_unlock(&sim->print_mtx);

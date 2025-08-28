@@ -6,7 +6,7 @@
 /*   By: itamsama <itamsama@student.42.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 06:35:18 by itamsama          #+#    #+#             */
-/*   Updated: 2025/08/28 18:27:25 by itamsama         ###   ########.fr       */
+/*   Updated: 2025/08/28 22:29:20 by itamsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	check_args(int argc, char **argv)
 	return (0);
 }
 
-static int validate(const t_sim *sim)
+static int	validate(const t_sim *sim)
 {
 	const t_data	*c;
 

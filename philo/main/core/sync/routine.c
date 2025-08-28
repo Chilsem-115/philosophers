@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itamsama <itamsama@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/28 22:28:34 by itamsama          #+#    #+#             */
+/*   Updated: 2025/08/28 22:28:58 by itamsama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "core.h"
 
 static void	sleep_ms(t_philo *p, long ms)
 {
-	long end;
+	long	end;
 
 	end = new_ms() + ms;
 	while (!sim_get_finished(p->sim) && new_ms() < end)

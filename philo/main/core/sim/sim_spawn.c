@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sim_state.c                                        :+:      :+:    :+:   */
+/*   sim_spawn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itamsama <itamsama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 22:25:29 by itamsama          #+#    #+#             */
-/*   Updated: 2025/08/28 22:25:42 by itamsama         ###   ########.fr       */
+/*   Created: 2025/08/28 22:24:39 by itamsama          #+#    #+#             */
+/*   Updated: 2025/08/28 22:24:57 by itamsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 
-void	stop_simulation(t_sim *sim)
+int	spawn_philos(t_sim *sim, int *out_created)
 {
-	pthread_mutex_lock(&sim->state_mtx);
-	sim->finished = 1;
-	pthread_mutex_unlock(&sim->state_mtx);
-}
+	int	i;
 
-int	stop_and_join(t_sim *sim, int n)
-{
-	stop_simulation(sim);
-	join_philos(sim, n);
+	*out_created = 0;
+	i = 0;
+	while (i < sim->cfg.philo_count)
+	{
+		if (pthread_create(&sim->philo[i].thread, NULL,
+				philo_routine, &sim->philo[i]) != 0)
+			break ;
+		i++;
+	}
+	*out_created = i;
 	return (0);
 }
 
-int	sim_get_finished(t_sim *sim)
+int	spawn_monitor(t_sim *sim)
 {
-	int	v;
-
-	pthread_mutex_lock(&sim->state_mtx);
-	v = sim->finished;
-	pthread_mutex_unlock(&sim->state_mtx);
-	return (v);
+	if (pthread_create(&sim->monitor, NULL, monitor_routine, sim) != 0)
+	{
+		stop_simulation(sim);
+		return (1);
+	}
+	return (0);
 }

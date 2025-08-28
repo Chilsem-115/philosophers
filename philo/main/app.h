@@ -6,12 +6,12 @@
 /*   By: itamsama <itamsama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 06:37:11 by itamsama          #+#    #+#             */
-/*   Updated: 2025/08/27 08:16:16 by itamsama         ###   ########.fr       */
+/*   Updated: 2025/08/28 22:22:22 by itamsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-#define PHILO_H
+#ifndef APP_H
+# define APP_H
 
 # include <string.h>
 # include <stdio.h>
@@ -56,7 +56,7 @@ typedef struct s_sim
 }	t_sim;
 
 /* utils */
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 
 /* init */
 int		parse(t_sim *sim, int argc, char **argv);

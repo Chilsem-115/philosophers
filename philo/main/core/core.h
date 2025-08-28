@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   core.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itamsama <itamsama@studen.1337.ma>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/28 22:23:40 by itamsama          #+#    #+#             */
+/*   Updated: 2025/08/28 22:23:54 by itamsama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CORE_H
 # define CORE_H
@@ -8,6 +19,7 @@
 int		simulate(t_sim *sim);
 long	new_ms(void);
 int		log_status(t_sim *sim, int id, const char *msg, int is_death);
+void	cleanup(t_sim *sim);
 
 /* spawn / join */
 int		spawn_philos(t_sim *sim, int *out_created);
