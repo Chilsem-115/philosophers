@@ -40,7 +40,7 @@ void	*philo_routine(void *arg)
 
 	p = (t_philo *)arg;
 	if ((p->id & 1))
-		usleep(500);
+		usleep(100);
 	while (!sim_get_finished(p->sim))
 	{
 		if (p->id & 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itamsama <itamsama@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: itamsama <itamsama@student.42.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 06:35:18 by itamsama          #+#    #+#             */
-/*   Updated: 2025/08/27 08:03:49 by itamsama         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:27:25 by itamsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static void	set_cfg(t_sim *sim, char **argv, int argc)
 	sim->cfg.t_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		sim->cfg.max_meals = ft_atoi(argv[5]);
+	else
+		sim->cfg.max_meals = 0;
 }
 
 static void	instruction_msg(void)

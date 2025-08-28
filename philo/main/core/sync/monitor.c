@@ -33,7 +33,7 @@ static int	quota_reached(t_sim *sim)
 	int	need;
 
 	need = sim->cfg.max_meals;
-	if (need == -1)
+	if (need == 0)
 		return (0);
 	i = 0;
 	while (i < sim->cfg.philo_count)
