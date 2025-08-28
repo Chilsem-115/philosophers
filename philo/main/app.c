@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 	t_sim	sim;
 
 	if (parse(&sim, argc, argv))
-		return (0);
+		return (1);
 	if (init_philo(&sim))
 	{
 		printf("Error: insufficient memory.\n");

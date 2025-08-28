@@ -92,10 +92,9 @@ int	parse(t_sim *sim, int argc, char **argv)
 			printf("invalid input\n");
 			return (1);
 		}
-		else
-			printf("success\n");
+		return (0);
 	}
 	else
 		instruction_msg();
-	return (0);
+	return (1);
 }
