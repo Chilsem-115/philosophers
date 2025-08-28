@@ -30,7 +30,10 @@ static void	philo_sleep_think(t_philo *p)
 	log_status(p->sim, p->id, "is sleeping", 0);
 	sleep_ms(p, p->sim->cfg.t_sleep);
 	log_status(p->sim, p->id, "is thinking", 0);
-	usleep(500);
+	if (p->sim->cfg.t_sleep < p->sim->cfg.t_eat)
+		usleep((p->sim->cfg.t_eat - p->sim->cfg.t_sleep) * 1000);
+	else
+		usleep(500);
 }
 
 /* id & 1 = 0 when even and 1 when odd*/
