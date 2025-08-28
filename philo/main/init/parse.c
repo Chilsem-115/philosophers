@@ -12,42 +12,7 @@
 
 #include "app.h"
 
-static int validate(t_sim *sim)
-{
-	if (sim->philo_count == -1)
-		return (1);
-	if (sim->time_to_die == -1)
-		return (1);
-	if (sim->time_to_eat == -1)
-		return (1);
-	if (sim->time_to_sleep == -1)
-		return (1);
-	if (sim->max_eat_count == -1)
-		return (1);
-	return (0);
-}
-
-static void	init_program(t_sim *sim, char **argv, int argc)
-{
-	sim->philo_count = ft_atoi(argv[1]);
-	sim->time_to_die = ft_atoi(argv[2]);
-	sim->time_to_eat= ft_atoi(argv[3]);
-	sim->time_to_sleep = ft_atoi(argv[4]);
-	if (argc == 6)
-		sim->max_eat_count = ft_atoi(argv[5]);
-}
-
-static void	instruction_msg(void)
-{
-	printf("Usage:\n");
-	printf("  ./philo <number_of_philosophers>\n");
-	printf("         <time_to_die>\n");
-	printf("         <time_to_eat>\n");
-	printf("         <time_to_sleep>\n");
-	printf("         [number_of_times_each_philosopher_must_eat]\n");
-	printf("\nRequires 4 or 5 arguments.\n");
-}
-
+/* only numbers allowed */
 static int	check_args(int argc, char **argv)
 {
 	int	i;
@@ -68,6 +33,50 @@ static int	check_args(int argc, char **argv)
 	return (0);
 }
 
+static int validate(const t_sim *sim)
+{
+	const t_data	*c;
+
+	c = &sim->cfg;
+	if (c->philo_count == -1)
+		return (1);
+	if (c->t_die == -1)
+		return (1);
+	if (c->t_eat == -1)
+		return (1);
+	if (c->t_sleep == -1)
+		return (1);
+	if (c->max_meals == -1)
+		return (1);
+	return (0);
+}
+
+static void	set_cfg(t_sim *sim, char **argv, int argc)
+{
+	sim->cfg.philo_count = ft_atoi(argv[1]);
+	sim->cfg.t_die = ft_atoi(argv[2]);
+	sim->cfg.t_eat = ft_atoi(argv[3]);
+	sim->cfg.t_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		sim->cfg.max_meals = ft_atoi(argv[5]);
+}
+
+static void	instruction_msg(void)
+{
+	printf("Usage:\n");
+	printf("  ./philo <number_of_philosophers>\n");
+	printf("         <time_to_die>\n");
+	printf("         <time_to_eat>\n");
+	printf("         <time_to_sleep>\n");
+	printf("         [number_of_times_each_philosopher_must_eat]\n");
+	printf("\nRequires 4 or 5 arguments.\n");
+}
+
+/*
+ * notice:
+ * 		- ft_atoi returns -1 in case of overflow
+ *		- parse returns 0 on success, 1 on error
+ * */
 int	parse(t_sim *sim, int argc, char **argv)
 {
 	if (argc == 5 || argc == 6)
@@ -75,18 +84,18 @@ int	parse(t_sim *sim, int argc, char **argv)
 		if (check_args(argc, argv))
 		{
 			printf("invalid input\n");
-			return (0);
+			return (1);
 		}
-		init_program(sim, argv, argc);
+		set_cfg(sim, argv, argc);
 		if (validate(sim))
 		{
 			printf("invalid input\n");
-			return (0);
+			return (1);
 		}
 		else
 			printf("success\n");
 	}
 	else
 		instruction_msg();
-	return (1);
+	return (0);
 }

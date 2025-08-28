@@ -20,34 +20,47 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-# define MAX_PHILO 200
+typedef struct s_sim	t_sim;
+
+typedef struct s_data
+{
+	int	philo_count;
+	int	t_die;
+	int	t_eat;
+	int	t_sleep;
+	int	max_meals;
+}	t_data;
 
 typedef struct s_philo
 {
 	int				id;
-	pthread_t		thread;
-	pthread_mutex_t	left;
-	pthread_mutex_t	right;
+	int				left;
+	int				right;
 	long			last_meal_ms;
 	int				meals;
-	int				is_dead;
-	t_sim			sim;
+	pthread_t		thread;
+	pthread_mutex_t	meal_mtx;
+	t_sim			*sim;
 }	t_philo;
 
 typedef struct s_sim
 {
-	int		philo_count;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		max_eat_count;
-	t_philo	*philo;
+	t_data			cfg;
+	t_philo			*philo;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	print_mtx;
+	pthread_mutex_t	state_mtx;
+	int				finished;
+	long			start_ms;
+	pthread_t		monitor;
 }	t_sim;
 
 /* utils */
 int	ft_atoi(const char *str);
 
-/* parse */
-int	parse(t_sim *sim, int argc, char **argv);
+/* init */
+int		parse(t_sim *sim, int argc, char **argv);
+int		init_philo(t_sim *sim);
+void	destroy_philo(t_sim *sim);
 
 #endif
